@@ -6,4 +6,3 @@ todo app web version
 買菜
 去蝦皮店到店拿包裹
 sync web app
-test

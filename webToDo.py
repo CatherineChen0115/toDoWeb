@@ -1,6 +1,7 @@
 import streamlit as st
 import modules.toDoFunctions as fn
 
+
 todos = fn.get_todos()
 
 def add_todo():
@@ -11,17 +12,22 @@ def add_todo():
     fn.write_todos(todos)
     
 ### layout ###
+st.set_page_config(layout="wide") #setting the page display as wide as screen
+
+with open('style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
 tab1, tab2, tab3 = st.tabs(["toDo", "ref", "others"])
 with tab1: #todo
     st.image("images/cat.jpg", width=150)
     st.header("Todo Function")
     #st.subheader("This is a todo web app.")
-    st.write("Please check the item you want to complete.")
 
-
+    st.write("<i>Enter new item and press enter.</i>", unsafe_allow_html=True)
     st.text_input(label="", placeholder="Enter a new todo...",
                 on_change=add_todo, key="newTodo")
 
+    st.write("<i>Please check the item you want to complete.</i>", unsafe_allow_html=True)
     for index, todo in enumerate(todos):
         todo_item = f"{index+1}． {todo}"
         checkBoxItem = st.checkbox(label=todo_item, key=todo) # show todo list
